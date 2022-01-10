@@ -16,8 +16,8 @@ class TreeComponentViewController: UIViewController {
     }()
     
     let dataSource: [Taxonomy] = [
-        Taxonomy(name: "Feijões"),
-        Taxonomy(name: "Ovos"),
+        Taxonomy(name: "Feijão"),
+        Taxonomy(name: "Ovo"),
         Taxonomy(name: "Sal")
     ]
     
