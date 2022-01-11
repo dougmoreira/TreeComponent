@@ -2,29 +2,30 @@ import UIKit
 
 class TreeComponentViewController: UIViewController {
 
-    let taxonomyIdentifier = String(describing: TaxonomyCell.self)
-    let categoryIdentifier = String(describing: CategoryHeader.self)
+    let rowTableCellIdentifier = String(describing: RowTableCell.self)
+    let categoryHeaderIdentifier = String(describing: CategoryHeader.self)
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .systemBrown
-        tableView.estimatedRowHeight = 50
+        tableView.backgroundColor = .systemBackground
+        tableView.estimatedRowHeight = 500
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    var callCount: Int = 0
+    
     var dataSource: [CatalogCategoryList] = [
         CatalogCategoryList(
             categories: [
                 CategoryList(
                     id: 1,
-                    name: "Alimentos básicos",
+                    name: "Itens reembolsados",
                     parentTaxonomies: [
-                        Taxonomy(name: "Feijões"),
-                        Taxonomy(name: "Ovos"),
-                        Taxonomy(name: "Sal")
+                        Taxonomy(name: "Cerveja 01"),
+                        Taxonomy(name: "Coca-cola"),
+                        Taxonomy(name: "Amaciante")
                     ],
                     isExpanded: false
                 )
@@ -34,13 +35,13 @@ class TreeComponentViewController: UIViewController {
             categories: [
                 CategoryList(
                     id: 2,
-                    name: "Feira",
+                    name: "Todos os itens",
                     parentTaxonomies: [
-                        Taxonomy(name: "Frutas"),
-                        Taxonomy(name: "Legumes"),
-                        Taxonomy(name: "Verduras")
+                        Taxonomy(name: "Feijão"),
+                        Taxonomy(name: "Arroz"),
+                        Taxonomy(name: "Omo")
                     ],
-                    isExpanded: false
+                    isExpanded: true
                 )
             ]
         ),
@@ -61,8 +62,8 @@ class TreeComponentViewController: UIViewController {
     
     // MARK: - Private methods
     private func registerCells() {
-        tableView.register(CategoryHeader.self, forHeaderFooterViewReuseIdentifier: categoryIdentifier)
-        tableView.register(TaxonomyCell.self, forCellReuseIdentifier: taxonomyIdentifier)
+        tableView.register(CategoryHeader.self, forHeaderFooterViewReuseIdentifier: categoryHeaderIdentifier)
+        tableView.register(RowTableCell.self, forCellReuseIdentifier: rowTableCellIdentifier)
     }
     
     private func setupTableViewConstraints() {
@@ -85,15 +86,11 @@ extension TreeComponentViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRows = dataSource[section].categories.first?.parentTaxonomies.count,
-                dataSource[section].categories.first?.isExpanded == true else {
-            return 0
-        }
-        return numberOfRows
+        dataSource[section].categories.first!.isExpanded ? 1 : 0
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: categoryIdentifier) as? CategoryHeader,
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: categoryHeaderIdentifier) as? CategoryHeader,
               let viewModel = dataSource[section].categories.first else {
             return nil
         }
@@ -104,21 +101,20 @@ extension TreeComponentViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: taxonomyIdentifier, for: indexPath) as? TaxonomyCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: rowTableCellIdentifier, for: indexPath) as? RowTableCell else {
             return UITableViewCell()
         }
         
-        cell.nameLabel.text = dataSource[indexPath.section].categories.first?.parentTaxonomies[indexPath.row].name
-        
+        cell.configure(viewModel: .init(taxonomies: dataSource[indexPath.section].categories.first!.parentTaxonomies))
+                
         return cell
     }
-    
 }
 
 extension TreeComponentViewController: CategoryHeaderDelegate {
     func didSelectHeader(at index: Int) {
         guard var aisle = dataSource[index].categories.first else { return }
-        if aisle.isExpanded == true {
+        if aisle.isExpanded {
             aisle.parentTaxonomies.removeAll()
         } else {
             aisle.parentTaxonomies = [

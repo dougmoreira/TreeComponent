@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49825874278E0943007CD5C0 /* RowTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49825873278E0942007CD5C0 /* RowTableCell.swift */; };
+		49825876278E0DE4007CD5C0 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49825875278E0DE4007CD5C0 /* CategoryCell.swift */; };
 		49C81419278CB31200C96BF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C81418278CB31200C96BF9 /* AppDelegate.swift */; };
 		49C8141B278CB31200C96BF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8141A278CB31200C96BF9 /* SceneDelegate.swift */; };
 		49C81422278CB31700C96BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C81421278CB31700C96BF9 /* Assets.xcassets */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49825873278E0942007CD5C0 /* RowTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTableCell.swift; sourceTree = "<group>"; };
+		49825875278E0DE4007CD5C0 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		49C81415278CB31200C96BF9 /* TreeComponentIfood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreeComponentIfood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C81418278CB31200C96BF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C8141A278CB31200C96BF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				49C8142E278CB42900C96BF9 /* CategoryModels.swift */,
 				49C81430278CB66300C96BF9 /* TaxonomyCell.swift */,
 				49C81436278CBD5400C96BF9 /* CategoryHeader.swift */,
+				49825873278E0942007CD5C0 /* RowTableCell.swift */,
+				49825875278E0DE4007CD5C0 /* CategoryCell.swift */,
 			);
 			path = TreeComponentIfood;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C81419278CB31200C96BF9 /* AppDelegate.swift in Sources */,
+				49825874278E0943007CD5C0 /* RowTableCell.swift in Sources */,
 				49C8142F278CB42900C96BF9 /* CategoryModels.swift in Sources */,
+				49825876278E0DE4007CD5C0 /* CategoryCell.swift in Sources */,
 				49C81437278CBD5400C96BF9 /* CategoryHeader.swift in Sources */,
 				49C8142D278CB32700C96BF9 /* TreeComponentViewController.swift in Sources */,
 				49C81431278CB66300C96BF9 /* TaxonomyCell.swift in Sources */,
