@@ -14,6 +14,7 @@ class TreeComponentViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
     var callCount: Int = 0
     var dataSource: [CatalogCategoryList] = [
         CatalogCategoryList(
@@ -22,11 +23,11 @@ class TreeComponentViewController: UIViewController {
                     id: 1,
                     name: "Alimentos básicos",
                     parentTaxonomies: [
-                        Taxonomy(name: "Feijões"),
-                        Taxonomy(name: "Ovos"),
-                        Taxonomy(name: "Sal")
+                        Taxonomy(title: "Just a test", description: "Feijões"),
+                        Taxonomy(description: "Ovos"),
+                        Taxonomy(description: "Sal")
                     ],
-                    isExpanded: false
+                    isExpanded: true
                 )
             ]
         ),
@@ -36,9 +37,9 @@ class TreeComponentViewController: UIViewController {
                     id: 2,
                     name: "Feira",
                     parentTaxonomies: [
-                        Taxonomy(name: "Frutas"),
-                        Taxonomy(name: "Legumes"),
-                        Taxonomy(name: "Verduras")
+                        Taxonomy(title: "Test two", description: "Frutas"),
+                        Taxonomy(description: "Legumes"),
+                        Taxonomy(description: "Verduras")
                     ],
                     isExpanded: false
                 )
@@ -104,11 +105,12 @@ extension TreeComponentViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: taxonomyIdentifier, for: indexPath) as? TaxonomyCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: taxonomyIdentifier, for: indexPath) as? TaxonomyCell,
+              let taxonomy = dataSource[indexPath.section].categories.first?.parentTaxonomies[indexPath.row] else {
             return UITableViewCell()
         }
         
-        cell.nameLabel.text = dataSource[indexPath.section].categories.first?.parentTaxonomies[indexPath.row].name
+        cell.configure(viewModel: .init(title: taxonomy.title ?? "", description: taxonomy.description))
         
         return cell
     }
@@ -122,10 +124,10 @@ extension TreeComponentViewController: CategoryHeaderDelegate {
             aisle.parentTaxonomies.removeAll()
         } else {
             aisle.parentTaxonomies = [
-                Taxonomy(name: "taxonomy1"),
-                Taxonomy(name: "taxonomy2"),
-                Taxonomy(name: "taxonomy3"),
-                Taxonomy(name: "taxonomy4"),
+                Taxonomy(description: "taxonomy1"),
+                Taxonomy(description: "taxonomy2"),
+                Taxonomy(description: "taxonomy3"),
+                Taxonomy(description: "taxonomy4"),
             ]
         }
         aisle.isExpanded.toggle()

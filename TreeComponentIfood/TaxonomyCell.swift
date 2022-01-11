@@ -1,10 +1,29 @@
 import UIKit
 
 class TaxonomyCell: UITableViewCell {
+    
+    struct ViewModel {
+        let title: String
+        let description: String
+    }
 
-    public let nameLabel: UILabel = {
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "taxonomyCell - nameLabel"
+        label.text = "taxonomyCell - titleLabel"
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "taxonomyCell - descriptionLabel"
         return label
     }()
     
@@ -19,7 +38,9 @@ class TaxonomyCell: UITableViewCell {
     }
     
     private func setup() {
-        addSubview(nameLabel)
+        addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(descriptionLabel)
         setupConstraints()
     }
     
@@ -30,9 +51,18 @@ class TaxonomyCell: UITableViewCell {
         
         NSLayoutConstraint.activate(
             [
-                nameLabel.topAnchor.constraint(equalTo: topAnchor),
-                nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                stackView.topAnchor.constraint(equalTo: topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             ]
         )
+    }
+}
+
+extension TaxonomyCell {
+    public func configure(viewModel: ViewModel) {
+        titleLabel.text = viewModel.title
+        descriptionLabel.text = viewModel.description
     }
 }

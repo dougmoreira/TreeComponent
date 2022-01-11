@@ -15,5 +15,16 @@ struct CategoryList: Codable {
 
 // MARK: - ParentTaxonomy
 struct Taxonomy: Codable {
-    let name: String
+    let title: String?
+    let description: String
+    
+    init(title: String, description: String) {
+        self.title = title
+        self.description = description
+    }
+    
+    init(description: String) {
+        self.title = nil
+        self.description = description
+    }
 }
