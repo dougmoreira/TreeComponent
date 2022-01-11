@@ -8,9 +8,18 @@ class RowTableCell: UITableViewCell {
 
     let taxonomyCellIdentifier = String(describing: TaxonomyCell.self)
     
-    let tableView = UITableView()
-    
     var dataSource: [Taxonomy] = []
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .systemBackground
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,23 +30,13 @@ class RowTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        tableView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+    private func setup() {
+        addSubview(tableView)
+        registerCells()
+        setupConstraints()
     }
     
-    private func setup() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .systemPink
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableView.register(TaxonomyCell.self, forCellReuseIdentifier: taxonomyCellIdentifier)
-        
-        addSubview(tableView)
-        
+    private func setupConstraints() {
         NSLayoutConstraint.activate(
             [
                 tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -46,6 +45,10 @@ class RowTableCell: UITableViewCell {
                 tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ]
         )
+    }
+    
+    private func registerCells() {
+        tableView.register(TaxonomyCell.self, forCellReuseIdentifier: taxonomyCellIdentifier)
     }
     
     func configure(viewModel: ViewModel) {
