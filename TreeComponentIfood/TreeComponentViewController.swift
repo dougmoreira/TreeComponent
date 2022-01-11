@@ -14,11 +14,36 @@ class TreeComponentViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    let dataSource: [Taxonomy] = [
-        Taxonomy(name: "Feijão"),
-        Taxonomy(name: "Ovo"),
-        Taxonomy(name: "Sal")
+    var callCount: Int = 0
+    var dataSource: [CatalogCategoryList] = [
+        CatalogCategoryList(
+            categories: [
+                CategoryList(
+                    id: 1,
+                    name: "Alimentos básicos",
+                    parentTaxonomies: [
+                        Taxonomy(name: "Feijões"),
+                        Taxonomy(name: "Ovos"),
+                        Taxonomy(name: "Sal")
+                    ],
+                    isExpanded: false
+                )
+            ]
+        ),
+        CatalogCategoryList(
+            categories: [
+                CategoryList(
+                    id: 2,
+                    name: "Feira",
+                    parentTaxonomies: [
+                        Taxonomy(name: "Frutas"),
+                        Taxonomy(name: "Legumes"),
+                        Taxonomy(name: "Verduras")
+                    ],
+                    isExpanded: false
+                )
+            ]
+        ),
     ]
     
     override func loadView() {
@@ -56,17 +81,25 @@ class TreeComponentViewController: UIViewController {
 extension TreeComponentViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSource.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let numberOfRows = dataSource[section].categories.first?.parentTaxonomies.count,
+                dataSource[section].categories.first?.isExpanded == true else {
+            return 0
+        }
+        return numberOfRows
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: categoryIdentifier) as? CategoryHeader else {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: categoryIdentifier) as? CategoryHeader,
+              let viewModel = dataSource[section].categories.first else {
             return nil
         }
+        header.titleLabel.text = viewModel.name
+        header.delegate = self
+        header.index = section
         return header
     }
     
@@ -75,9 +108,28 @@ extension TreeComponentViewController: UITableViewDelegate, UITableViewDataSourc
             return UITableViewCell()
         }
         
-        cell.nameLabel.text = dataSource[indexPath.row].name
+        cell.nameLabel.text = dataSource[indexPath.section].categories.first?.parentTaxonomies[indexPath.row].name
         
         return cell
     }
     
+}
+
+extension TreeComponentViewController: CategoryHeaderDelegate {
+    func didSelectHeader(at index: Int) {
+        guard var aisle = dataSource[index].categories.first else { return }
+        if aisle.isExpanded == true {
+            aisle.parentTaxonomies.removeAll()
+        } else {
+            aisle.parentTaxonomies = [
+                Taxonomy(name: "taxonomy1"),
+                Taxonomy(name: "taxonomy2"),
+                Taxonomy(name: "taxonomy3"),
+                Taxonomy(name: "taxonomy4"),
+            ]
+        }
+        aisle.isExpanded.toggle()
+        dataSource[index].categories[0] = aisle
+        tableView.reloadData()
+    }
 }

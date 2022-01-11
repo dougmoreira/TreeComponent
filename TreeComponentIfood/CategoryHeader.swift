@@ -1,6 +1,13 @@
 import UIKit
 
+protocol CategoryHeaderDelegate: AnyObject {
+    func didSelectHeader(at index: Int)
+}
+
 class CategoryHeader: UITableViewHeaderFooterView {
+    
+    var index: Int = 0
+    weak var delegate: CategoryHeaderDelegate?
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -18,10 +25,15 @@ class CategoryHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc
+    private func didTapHeader() {
+        delegate?.didSelectHeader(at: index)
+    }
     
     private func setup() {
         addSubview(titleLabel)
         setupConstraints()
+        setupGestures()
     }
     
     private func setupConstraints() {
@@ -31,5 +43,10 @@ class CategoryHeader: UITableViewHeaderFooterView {
                 titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
             ]
         )
+    }
+    
+    private func setupGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
+        contentView.addGestureRecognizer(tap)
     }
 }
