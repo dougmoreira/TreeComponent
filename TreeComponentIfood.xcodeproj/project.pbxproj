@@ -15,6 +15,7 @@
 		49C8142F278CB42900C96BF9 /* CategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8142E278CB42900C96BF9 /* CategoryModels.swift */; };
 		49C81431278CB66300C96BF9 /* TaxonomyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C81430278CB66300C96BF9 /* TaxonomyCell.swift */; };
 		49C81437278CBD5400C96BF9 /* CategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C81436278CBD5400C96BF9 /* CategoryHeader.swift */; };
+		49F81512278F4C8A00430E30 /* ItemsSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F81511278F4C8A00430E30 /* ItemsSectionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		49C8142E278CB42900C96BF9 /* CategoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModels.swift; sourceTree = "<group>"; };
 		49C81430278CB66300C96BF9 /* TaxonomyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyCell.swift; sourceTree = "<group>"; };
 		49C81436278CBD5400C96BF9 /* CategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeader.swift; sourceTree = "<group>"; };
+		49F81511278F4C8A00430E30 /* ItemsSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSectionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				49C8142E278CB42900C96BF9 /* CategoryModels.swift */,
 				49C81430278CB66300C96BF9 /* TaxonomyCell.swift */,
 				49C81436278CBD5400C96BF9 /* CategoryHeader.swift */,
+				49F81511278F4C8A00430E30 /* ItemsSectionModel.swift */,
 			);
 			path = TreeComponentIfood;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				49C8142F278CB42900C96BF9 /* CategoryModels.swift in Sources */,
 				49C81437278CBD5400C96BF9 /* CategoryHeader.swift in Sources */,
 				49C8142D278CB32700C96BF9 /* TreeComponentViewController.swift in Sources */,
+				49F81512278F4C8A00430E30 /* ItemsSectionModel.swift in Sources */,
 				49C81431278CB66300C96BF9 /* TaxonomyCell.swift in Sources */,
 				49C8141B278CB31200C96BF9 /* SceneDelegate.swift in Sources */,
 			);
