@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - ItemsSection
-struct ItemsSection: Codable {
+public struct ItemsSection: Codable {
     let type: ItemsSectionType
     let title: String?
     let icon: String?
@@ -11,14 +11,14 @@ struct ItemsSection: Codable {
 }
 
 // MARK: - SubSection
-struct SubSection: Codable {
+public struct SubSection: Codable {
     let title: String?
     let icon: String?
     let items: [Item]
 }
 
 // MARK: - Item
-struct Item: Codable {
+public struct Item: Codable {
     let id: String
     let name: String
     let originalItem: OriginalItem?
@@ -37,18 +37,18 @@ struct Item: Codable {
 }
 
 // MARK: - OriginalItem
-struct OriginalItem: Codable {
+public struct OriginalItem: Codable {
     let id: String
     let name: String
 }
 
-enum ItemsSectionType: String, Codable {
+public enum ItemsSectionType: String, Codable {
     case `default`
     case grocery
 }
 
 
-struct ViewModelSection: Codable {
+public struct ViewModelSection: Codable {
     let type: ItemsSectionType
     let title: String?
     let icon: String?
@@ -57,7 +57,7 @@ struct ViewModelSection: Codable {
     var isExpanded: Bool
 }
 
-struct ViewModelItem: Codable {
+public struct ViewModelItem: Codable {
     let title: String?
     let item: Item
 }

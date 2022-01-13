@@ -64,5 +64,6 @@ extension TaxonomyCell {
     public func configure(viewModel: ViewModel) {
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
+    
     }
 }
