@@ -1,19 +1,6 @@
-//
-//  ItemSectionCell.swift
-//  TreeComponentIfood
-//
-//  Created by douglas.moreira on 13/01/22.
-//
-
 import UIKit
 
-protocol ItemSectionDelegate: NSObject {
-    func updateSectionHeight()
-}
-
 final class ItemSectionCell: UITableViewCell {
-    
-    weak var sectionDelegate: ItemSectionDelegate?
     
     struct ItemSectionViewModel {
         let title: String
@@ -24,14 +11,21 @@ final class ItemSectionCell: UITableViewCell {
     
     let taxonomyIdentifier = String(describing: TaxonomyCell.self)
     
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     lazy var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
         
@@ -39,6 +33,7 @@ final class ItemSectionCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "section"
+        label.numberOfLines = 0
         return label
     }()
 
@@ -53,8 +48,10 @@ final class ItemSectionCell: UITableViewCell {
     }
     
     private func setup() {
-        addSubview(titleLabel)
-        addSubview(itemTableView)
+        addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(itemTableView)
+        
         registerCells()
         setupConstraints()
     }
@@ -66,29 +63,23 @@ final class ItemSectionCell: UITableViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate(
             [
-                titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 24),
-                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
+                stackView.topAnchor.constraint(equalTo: topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             ]
         )
         
-        NSLayoutConstraint.activate(
-            [
-                itemTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
-                itemTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                itemTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                itemTableView.trailingAnchor.constraint(equalTo: trailingAnchor)
-            ]
-        )
     }
     
     public func setupItemSection(with viewData: ItemSectionViewModel) {
         titleLabel.text = viewData.title
         subsection = viewData.subSection
         
+        itemTableView.invalidateIntrinsicContentSize()
+        itemTableView.layoutIfNeeded()
+        
         itemTableView.reloadData()
-        sectionDelegate?.updateSectionHeight()
-
-                
     }
 
 }
@@ -102,7 +93,6 @@ extension ItemSectionCell: UITableViewDelegate, UITableViewDataSource {
         subsection?.count ?? .zero
     }
     
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: taxonomyIdentifier, for: indexPath) as? TaxonomyCell,
@@ -113,5 +103,6 @@ extension ItemSectionCell: UITableViewDelegate, UITableViewDataSource {
     
         return cell
     }
+    
     
 }

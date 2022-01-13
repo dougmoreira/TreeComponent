@@ -26,7 +26,7 @@ final class V2ViewController: UIViewController {
         ),
         ItemsSection(
             type: .grocery,
-            title: "Todos os itens do seu pedido",
+            title: "Todos os itens do seu pedido bla blab alb alb alba lb",
             icon: "",
             details: "(5 produtos)",
             subSections: [
@@ -58,10 +58,8 @@ final class V2ViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .systemBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
-    
     
     // MARK: - Lifecycle
     
@@ -93,9 +91,6 @@ final class V2ViewController: UIViewController {
             ]
         )
     }
-    
-
-
 }
 
 
@@ -112,18 +107,8 @@ extension V2ViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: itemSectionIdentifier, for: indexPath) as? ItemSectionCell,
             let item = dataSource?[indexPath.item] else { return UITableViewCell() }
         
-        
         cell.setupItemSection(with: .init(title: item.title ?? String(), subSection: item.subSections))
-        cell.sectionDelegate = self
-        
         
         return cell
-    }
-
-}
-
-extension V2ViewController: ItemSectionDelegate {
-    func updateSectionHeight() {
-        sectionTableView.reloadData()
     }
 }
