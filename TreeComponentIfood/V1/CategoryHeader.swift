@@ -39,8 +39,10 @@ class CategoryHeader: UITableViewHeaderFooterView {
     private func setupConstraints() {
         NSLayoutConstraint.activate(
             [
-                titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-                titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+                titleLabel.topAnchor.constraint(equalTo: topAnchor),
+                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+                titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             ]
         )
     }

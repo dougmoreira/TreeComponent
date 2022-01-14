@@ -20,8 +20,8 @@ final class ItemSectionCell: UITableViewCell {
         return stackView
     }()
     
-    lazy var itemTableView: UITableView = {
-        let tableView = UITableView()
+    lazy var itemTableView: ItemTableView = {
+        let tableView = ItemTableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemBlue
@@ -75,11 +75,6 @@ final class ItemSectionCell: UITableViewCell {
     public func setupItemSection(with viewData: ItemSectionViewModel) {
         titleLabel.text = viewData.title
         subsection = viewData.subSection
-        
-        itemTableView.invalidateIntrinsicContentSize()
-        itemTableView.layoutIfNeeded()
-        
-        itemTableView.reloadData()
     }
 
 }

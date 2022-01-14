@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4942421C279085E900496C72 /* ItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942421B279085E900496C72 /* ItemTableView.swift */; };
+		4942421F2790B4CF00496C72 /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942421E2790B4CF00496C72 /* TreeViewController.swift */; };
+		494242212790B4EF00496C72 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494242202790B4EF00496C72 /* ViewModel.swift */; };
+		494242232790B73D00496C72 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494242222790B73D00496C72 /* ItemCell.swift */; };
+		49A785C22791AC9100993D11 /* SubSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A785C12791AC9100993D11 /* SubSectionCell.swift */; };
 		49C81419278CB31200C96BF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C81418278CB31200C96BF9 /* AppDelegate.swift */; };
 		49C8141B278CB31200C96BF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8141A278CB31200C96BF9 /* SceneDelegate.swift */; };
 		49C81422278CB31700C96BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C81421278CB31700C96BF9 /* Assets.xcassets */; };
@@ -23,6 +27,10 @@
 
 /* Begin PBXFileReference section */
 		4942421B279085E900496C72 /* ItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableView.swift; sourceTree = "<group>"; };
+		4942421E2790B4CF00496C72 /* TreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewController.swift; sourceTree = "<group>"; };
+		494242202790B4EF00496C72 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		494242222790B73D00496C72 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		49A785C12791AC9100993D11 /* SubSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSectionCell.swift; sourceTree = "<group>"; };
 		49C81415278CB31200C96BF9 /* TreeComponentIfood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreeComponentIfood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C81418278CB31200C96BF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C8141A278CB31200C96BF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +57,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4942421D2790B4B100496C72 /* V1.1 */ = {
+			isa = PBXGroup;
+			children = (
+				4942421E2790B4CF00496C72 /* TreeViewController.swift */,
+				494242222790B73D00496C72 /* ItemCell.swift */,
+				494242202790B4EF00496C72 /* ViewModel.swift */,
+				49A785C12791AC9100993D11 /* SubSectionCell.swift */,
+			);
+			path = V1.1;
+			sourceTree = "<group>";
+		};
 		49C8140C278CB31200C96BF9 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +87,7 @@
 		49C81417278CB31200C96BF9 /* TreeComponentIfood */ = {
 			isa = PBXGroup;
 			children = (
+				4942421D2790B4B100496C72 /* V1.1 */,
 				742BA99D27905C2400015B1A /* V2 */,
 				742BA99C27905C0E00015B1A /* V1 */,
 				49C81418278CB31200C96BF9 /* AppDelegate.swift */,
@@ -171,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494242232790B73D00496C72 /* ItemCell.swift in Sources */,
 				742BA99F27905C3900015B1A /* V2ViewController.swift in Sources */,
 				49C81419278CB31200C96BF9 /* AppDelegate.swift in Sources */,
 				49C8142F278CB42900C96BF9 /* CategoryModels.swift in Sources */,
@@ -180,7 +201,10 @@
 				49C81431278CB66300C96BF9 /* TaxonomyCell.swift in Sources */,
 				49C8141B278CB31200C96BF9 /* SceneDelegate.swift in Sources */,
 				742BA9A127905E2600015B1A /* ItemSectionCell.swift in Sources */,
+				49A785C22791AC9100993D11 /* SubSectionCell.swift in Sources */,
 				4942421C279085E900496C72 /* ItemTableView.swift in Sources */,
+				494242212790B4EF00496C72 /* ViewModel.swift in Sources */,
+				4942421F2790B4CF00496C72 /* TreeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
