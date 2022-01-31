@@ -19,7 +19,7 @@ final class V2ViewController: UIViewController {
                 SubSection(
                     title: "",
                     icon: "",
-                    items: [Item(id: "0", name: "Guaraná"), Item(id: "1", name: "Feijão")]
+                    items: [TreeItem(id: "0", name: "Guaraná"), TreeItem(id: "1", name: "Feijão")]
                 )
             ],
             isExpanded: true
@@ -33,15 +33,15 @@ final class V2ViewController: UIViewController {
                 SubSection(
                     title: "Itens alterados",
                     icon: "",
-                    items: [Item(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
-                            Item(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
+                    items: [TreeItem(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
+                            TreeItem(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
                 ),
                 SubSection(
                     title: "Itens sem alteração",
                     icon: "",
-                    items: [Item(id: "0", name: "Ovo"),
-                            Item(id: "0", name: "Óleo"),
-                            Item(id: "1", name: "Coca-cola")]
+                    items: [TreeItem(id: "0", name: "Ovo"),
+                            TreeItem(id: "0", name: "Óleo"),
+                            TreeItem(id: "1", name: "Coca-cola")]
                 ),
             ],
             isExpanded: true

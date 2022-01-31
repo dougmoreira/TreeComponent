@@ -15,7 +15,7 @@ class TreeComponentViewController: UIViewController {
         return tableView
     }()
     
-    var viewModelDataSource: [ViewModelSection]? = []
+    var viewModelDataSource: [ViewModelSectionV1]? = []
     
     var dataSource: [ItemsSection]? = [
         ItemsSection(
@@ -27,7 +27,7 @@ class TreeComponentViewController: UIViewController {
                 SubSection(
                     title: "",
                     icon: "",
-                    items: [Item(id: "0", name: "Guaraná"), Item(id: "1", name: "Feijão")]
+                    items: [TreeItem(id: "0", name: "Guaraná"), TreeItem(id: "1", name: "Feijão")]
                 )
             ],
             isExpanded: true
@@ -41,15 +41,15 @@ class TreeComponentViewController: UIViewController {
                 SubSection(
                     title: "Itens alterados",
                     icon: "",
-                    items: [Item(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
-                            Item(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
+                    items: [TreeItem(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
+                            TreeItem(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
                 ),
                 SubSection(
                     title: "Itens sem alteração",
                     icon: "",
-                    items: [Item(id: "0", name: "Ovo"),
-                            Item(id: "0", name: "Óleo"),
-                            Item(id: "1", name: "Coca-cola")]
+                    items: [TreeItem(id: "0", name: "Ovo"),
+                            TreeItem(id: "0", name: "Óleo"),
+                            TreeItem(id: "1", name: "Coca-cola")]
                 ),
             ],
             isExpanded: true
@@ -88,18 +88,18 @@ class TreeComponentViewController: UIViewController {
     }
     
     private func adapter() {
-        var viewModelSection: [ViewModelSection] = []
+        var viewModelSection: [ViewModelSectionV1] = []
         
         dataSource?.forEach { itemSection in
-            var viewModelItems: [ViewModelItem] = []
+            var viewModelItems: [ViewModelItemV1] = []
             itemSection.subSections.forEach({ subSection in
                 for (index, item) in subSection.items.enumerated() {
-                    viewModelItems.append(ViewModelItem(title: index == 0 ? subSection.title : "", item: item))
+                    viewModelItems.append(ViewModelItemV1(title: index == 0 ? subSection.title : "", item: item))
                 }
             })
             
             viewModelSection.append(
-                ViewModelSection(
+                ViewModelSectionV1(
                     type: itemSection.type,
                     title: itemSection.title,
                     icon: itemSection.icon,
@@ -162,13 +162,13 @@ extension TreeComponentViewController: CategoryHeaderDelegate {
             section.viewModelItems?.removeAll()
         } else {
             section.viewModelItems = [
-                ViewModelItem(title: "Novo viewModel", item: Item(id: "0", name: "Novo Item 01")),
-                ViewModelItem(title: "", item: Item(id: "1", name: "Novo Item 02")),
-                ViewModelItem(title: "", item: Item(id: "2", name: "Novo Item 03")),
-                ViewModelItem(title: "", item: Item(id: "3", name: "Novo Item 04")),
-                ViewModelItem(title: "Secão 02", item: Item(id: "0", name: "Novo Item Secáo 02 - 01")),
-                ViewModelItem(title: "", item: Item(id: "1", name: "Novo Item Secáo 02 - 02")),
-                ViewModelItem(title: "", item: Item(id: "2", name: "Novo Item Secáo 02 - 03")),
+                ViewModelItemV1(title: "Novo viewModel", item: TreeItem(id: "0", name: "Novo Item 01")),
+                ViewModelItemV1(title: "", item: TreeItem(id: "1", name: "Novo Item 02")),
+                ViewModelItemV1(title: "", item: TreeItem(id: "2", name: "Novo Item 03")),
+                ViewModelItemV1(title: "", item: TreeItem(id: "3", name: "Novo Item 04")),
+                ViewModelItemV1(title: "Secão 02", item: TreeItem(id: "0", name: "Novo Item Secáo 02 - 01")),
+                ViewModelItemV1(title: "", item: TreeItem(id: "1", name: "Novo Item Secáo 02 - 02")),
+                ViewModelItemV1(title: "", item: TreeItem(id: "2", name: "Novo Item Secáo 02 - 03")),
             ]
         }
         section.isExpanded.toggle()

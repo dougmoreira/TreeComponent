@@ -12,18 +12,3 @@ enum ItemViewModelType {
     case separator
 }
 
-protocol ItemViewModable {
-    var title: String { get set }
-    var type: ItemViewModelType { get set }
-}
-
-struct SeparatorViewModel: ItemViewModable {
-    var title: String
-    var type: ItemViewModelType
-}
-
-struct ItemViewModel: ItemViewModable {
-    var title: String
-    var type: ItemViewModelType
-    let price: String
-}

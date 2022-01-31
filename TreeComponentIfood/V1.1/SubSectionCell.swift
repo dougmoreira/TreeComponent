@@ -10,6 +10,7 @@ class SubSectionCell: UITableViewCell {
         let label = UILabel()
         label.text = "itemCell"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemRed
         return label
     }()
     

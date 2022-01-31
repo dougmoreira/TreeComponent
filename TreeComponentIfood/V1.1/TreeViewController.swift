@@ -16,7 +16,7 @@ class TreeViewController: UIViewController {
                 SubSection(
                     title: "",
                     icon: "",
-                    items: [Item(id: "0", name: "Guaraná"), Item(id: "1", name: "Feijão")]
+                    items: [TreeItem(id: "0", name: "Guaraná"), TreeItem(id: "1", name: "Feijão")]
                 )
             ],
             isExpanded: false
@@ -30,15 +30,15 @@ class TreeViewController: UIViewController {
                 SubSection(
                     title: "Itens alterados",
                     icon: "",
-                    items: [Item(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
-                            Item(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
+                    items: [TreeItem(id: "0", name: "Heineken", originalItem: OriginalItem(id: "0", name: "Brahma")),
+                            TreeItem(id: "1", name: "Arroz tipo 1", originalItem: OriginalItem(id: "0", name: "Arroz tipo 2"))]
                 ),
                 SubSection(
                     title: "Itens sem alteração",
                     icon: "",
-                    items: [Item(id: "0", name: "Ovo"),
-                            Item(id: "0", name: "Óleo"),
-                            Item(id: "1", name: "Coca-cola")]
+                    items: [TreeItem(id: "0", name: "Ovo"),
+                            TreeItem(id: "0", name: "Óleo"),
+                            TreeItem(id: "1", name: "Coca-cola")]
                 ),
             ],
             isExpanded: false
@@ -84,11 +84,11 @@ class TreeViewController: UIViewController {
             .map { section -> SectionViewModel in
                 
                 let items = section.subSections.map { subSection -> [ItemViewModable] in
-                    let items = subSection.items.map { ItemViewModel(title: $0.name, type: .item, price: "20,00") }
+                    let items = subSection.items.map { ItemViewModel(name: $0.name, type: .item, price: "20,00", originalItem: nil) }
                     
                     var viewModels: [ItemViewModable] = []
                     if let title = subSection.title, !title.isEmpty {
-                        viewModels.append(SeparatorViewModel(title: title, type: .separator))
+                        viewModels.append(SeparatorViewModel(name: title, type: .separator))
                     }
                     viewModels.append(contentsOf: items)
                     return viewModels
@@ -136,7 +136,7 @@ extension TreeViewController: UITableViewDelegate, UITableViewDataSource {
                     return UITableViewCell()
                 }
                 
-                cell.configure(viewModel: .init(title: separatorViewModel.title))
+                cell.configure(viewModel: .init(title: separatorViewModel.name))
                 
                 return cell
             case .item:
@@ -145,7 +145,14 @@ extension TreeViewController: UITableViewDelegate, UITableViewDataSource {
                     return UITableViewCell()
                 }
                 
-                cell.configure(viewModel: .init(title: itemViewModel.title, price: itemViewModel.price))
+                cell.configure(
+                    viewModel: .init(
+                        replacedItemName: itemViewModel.name,
+                        replacedItemPrice: itemViewModel.price,
+                        originalItemName: "",
+                        originalItemPrice: ""
+                    )
+                )
                 
                 return cell
         }

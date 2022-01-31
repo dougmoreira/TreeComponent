@@ -3,20 +3,36 @@ import UIKit
 class ItemCell: UITableViewCell {
     
     struct ViewModel {
-        let title: String
-        let price: String
+        let replacedItemName: String
+        let replacedItemPrice: String
+        let originalItemName: String?
+        let originalItemPrice: String?
     }
-
-    let titleLabel: UILabel = {
+    
+    let replacedItemName: UILabel = {
         let label = UILabel()
-        label.text = "itemCell - title label"
+        label.text = "replacedItemName - itemCell"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let priceLabel: UILabel = {
+    let originalItemNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "itemCell - price label"
+        label.text = "originalItemName - itemCell"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let replacedItemPriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "replacedItemPriceLabel - itemCell"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let originalItemPriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "originalItemPriceLabel - itemCell"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -31,27 +47,46 @@ class ItemCell: UITableViewCell {
     }
     
     private func setup() {
-        addSubview(titleLabel)
-        addSubview(priceLabel)
+        addSubview(replacedItemName)
+        addSubview(replacedItemPriceLabel)
+        addSubview(originalItemNameLabel)
+        addSubview(originalItemPriceLabel)
         setupConstraints()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            replacedItemName.topAnchor.constraint(equalTo: topAnchor),
+            replacedItemName.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            priceLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            priceLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor)
+            replacedItemPriceLabel.topAnchor.constraint(equalTo: replacedItemName.topAnchor),
+            replacedItemPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            replacedItemPriceLabel.bottomAnchor.constraint(equalTo: replacedItemName.bottomAnchor),
+            
+            originalItemNameLabel.topAnchor.constraint(equalTo: replacedItemName.bottomAnchor),
+            originalItemNameLabel.leadingAnchor.constraint(equalTo: replacedItemName.leadingAnchor, constant: 32),
+            originalItemNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            originalItemPriceLabel.topAnchor.constraint(equalTo: originalItemNameLabel.topAnchor),
+            originalItemPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            originalItemPriceLabel.bottomAnchor.constraint(equalTo: originalItemNameLabel.bottomAnchor),
         ])
     }
 }
 
 extension ItemCell {
     public func configure(viewModel: ViewModel) {
-        titleLabel.text = viewModel.title
-        priceLabel.text = "R$ \(viewModel.price)"
+        replacedItemName.text = viewModel.replacedItemName
+        replacedItemPriceLabel.text = "R$ \(viewModel.replacedItemPrice)"
+        if let originalItemName = viewModel.originalItemName, originalItemName.isEmpty,
+            let originalItemPrice = viewModel.originalItemPrice, originalItemPrice.isEmpty {
+            originalItemNameLabel.isHidden = true
+            originalItemPriceLabel.isHidden = true
+            originalItemNameLabel.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            originalItemPriceLabel.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        } else {
+            originalItemNameLabel.text = viewModel.originalItemName
+            originalItemPriceLabel.text = "R$ \(viewModel.originalItemPrice ?? "")"
+        }
     }
 }
