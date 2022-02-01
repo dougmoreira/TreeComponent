@@ -82,9 +82,9 @@ extension ItemCell {
             let originalItemPrice = viewModel.originalItemPrice, originalItemPrice.isEmpty {
             originalItemNameLabel.isHidden = true
             originalItemPriceLabel.isHidden = true
-            originalItemNameLabel.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            originalItemPriceLabel.heightAnchor.constraint(equalToConstant: 0).isActive = true
         } else {
+            originalItemNameLabel.isHidden = false
+            originalItemPriceLabel.isHidden = false
             originalItemNameLabel.text = viewModel.originalItemName
             originalItemPriceLabel.text = "R$ \(viewModel.originalItemPrice ?? "")"
         }
